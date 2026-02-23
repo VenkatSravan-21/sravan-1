@@ -1,0 +1,25 @@
+{
+  "name": "sravan-portfolio",
+  "version": "1.0.0",
+  "description": "Professional portfolio of Guntumadugu Venkata Sravan - Biomedical & AI Engineer",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "portfolio",
+    "biomedical",
+    "ai",
+    "deep-learning",
+    "research"
+  ],
+  "author": "Guntumadugu Venkata Sravan",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "engines": {
+    "node": "18.x"
+  }
+}

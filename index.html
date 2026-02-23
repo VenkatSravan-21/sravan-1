@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GV SRAVAN — Biomedical & AI Engineering</title>
+  <meta name="description"
+    content="Portfolio of Guntumadugu Venkata Sravan — B.Tech Biomedical Engineering, Springer-published AI healthcare researcher.">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28'>⚡</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Sora:wght@400;500;600;700;800&display=swap');
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #050508;
+      color: #cbd5e1;
+      overflow-x: hidden
+    }
+
+    .font-display {
+      font-family: 'Sora', sans-serif
+    }
+
+    ::-webkit-scrollbar {
+      width: 5px
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #050508
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #1a1a2e;
+      border-radius: 10px
+    }
+
+    /* ── Reveal (GPU) ── */
+    .sr {
+      opacity: 0;
+      transform: translate3d(0, 28px, 0);
+      transition: opacity .65s cubic-bezier(.215, .61, .355, 1), transform .65s cubic-bezier(.215, .61, .355, 1);
+      will-change: opacity, transform
+    }
+
+    .sr.v {
+      opacity: 1;
+      transform: translate3d(0, 0, 0)
+    }
+
+    .sr-d1 {
+      transition-delay: .07s
+    }
+
+    .sr-d2 {
+      transition-delay: .14s
+    }
+
+    .sr-d3 {
+      transition-delay: .21s
+    }
+
+    .sr-d4 {
+      transition-delay: .28s
+    }
+
+    .sr-d5 {
+      transition-delay: .35s
+    }
+
+    /* ── Navbar ── */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 60;
+      transition: all .35s cubic-bezier(.215, .61, .355, 1)
+    }
+
+    .navbar.scrolled {
+      background: rgba(5, 5, 8, .85);
+      backdrop-filter: blur(20px) saturate(1.5);
+      -webkit-backdrop-filter: blur(20px) saturate(1.5);
+      border-bottom: 1px solid rgba(255, 255, 255, .04)
+    }
+
+    .nav-item {
+      position: relative;
+      font-size: .8125rem;
+      font-weight: 500;
+      color: #64748b;
+      letter-spacing: .025em;
+      padding: .25rem 0;
+      transition: color .2s
+    }
+
+    .nav-item:hover,
+    .nav-item.on {
+      color: #e2e8f0
+    }
+
+    .nav-item::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      width: 0;
+      height: 1.5px;
+      background: #3b82f6;
+      border-radius: 2px;
+      transition: width .25s, left .25s
+    }
+
+    .nav-item:hover::after,
+    .nav-item.on::after {
+      width: 100%;
+      left: 0
+    }
+
+    /* ── Mobile drawer ── */
+    .drawer-bg {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .5);
+      backdrop-filter: blur(3px);
+      opacity: 0;
+      visibility: hidden;
+      z-index: 70;
+      transition: all .3s
+    }
+
+    .drawer-bg.show {
+      opacity: 1;
+      visibility: visible
+    }
+
+    .drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: min(280px, 80vw);
+      height: 100dvh;
+      background: rgba(8, 8, 14, .98);
+      border-left: 1px solid rgba(255, 255, 255, .04);
+      z-index: 80;
+      transform: translate3d(100%, 0, 0);
+      transition: transform .4s cubic-bezier(.16, 1, .3, 1);
+      padding: 5rem 1.75rem 2rem;
+      will-change: transform
+    }
+
+    .drawer.show {
+      transform: translate3d(0, 0, 0)
+    }
+
+    .drawer-link {
+      display: block;
+      padding: .75rem 0;
+      font-size: .9375rem;
+      font-weight: 500;
+      color: #94a3b8;
+      border-bottom: 1px solid rgba(255, 255, 255, .03);
+      transition: color .2s, padding-left .25s
+    }
+
+    .drawer-link:hover {
+      color: #60a5fa;
+      padding-left: 6px
+    }
+
+    .burger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      z-index: 90;
+      position: relative
+    }
+
+    .burger span {
+      display: block;
+      width: 20px;
+      height: 1.5px;
+      background: #e2e8f0;
+      border-radius: 2px;
+      transition: all .25s cubic-bezier(.215, .61, .355, 1);
+      transform-origin: center
+    }
+
+    .burger.x span:nth-child(1) {
+      transform: rotate(45deg) translate(3.5px, 4.5px)
+    }
+
+    .burger.x span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0)
+    }
+
+    .burger.x span:nth-child(3) {
+      transform: rotate(-45deg) translate(3.5px, -4.5px)
+    }
+
+    /* ── Gradient text ── */
+    .gt {
+      background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text
+    }
+
+    /* ── Card ── */
+    .card {
+      background: rgba(255, 255, 255, .02);
+      border: 1px solid rgba(255, 255, 255, .04);
+      border-radius: 1rem;
+      transition: border-color .3s, box-shadow .3s, transform .3s cubic-bezier(.215, .61, .355, 1);
+      will-change: transform
+    }
+
+    .card:hover {
+      border-color: rgba(59, 130, 246, .1);
+      box-shadow: 0 6px 32px -10px rgba(59, 130, 246, .07);
+      transform: translate3d(0, -2px, 0)
+    }
+
+    /* ── Research glow card ── */
+    .research-card {
+      position: relative;
+      overflow: hidden
+    }
+
+    .research-card::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      padding: 1.5px;
+      background: conic-gradient(from var(--angle, 0deg), transparent 40%, var(--glow-clr) 50%, transparent 60%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity .4s;
+      pointer-events: none
+    }
+
+    .research-card:hover::before {
+      opacity: 1;
+      animation: glow-rotate 3s linear infinite
+    }
+
+    @keyframes glow-rotate {
+      to {
+        --angle: 360deg
+      }
+    }
+
+    @property --angle {
+      syntax: '<angle>';
+      initial-value: 0deg;
+      inherits: false
+    }
+
+    .research-card .watermark-icon {
+      transition: transform .6s cubic-bezier(.215, .61, .355, 1), opacity .4s
+    }
+
+    .research-card:hover .watermark-icon {
+      transform: scale(1.15) rotate(-5deg);
+      opacity: .06
+    }
+
+    .pulse-badge {
+      animation: pulse-glow 2.5s ease-in-out infinite
+    }
+
+    @keyframes pulse-glow {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 rgba(74, 222, 128, .15)
+      }
+
+      50% {
+        box-shadow: 0 0 12px rgba(74, 222, 128, .25)
+      }
+    }
+
+    .reading-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--glow-clr), transparent);
+      width: 0;
+      transition: width .6s cubic-bezier(.215, .61, .355, 1)
+    }
+
+    .research-card:hover .reading-bar {
+      width: 100%
+    }
+
+    /* ── Project enhanced card ── */
+    .project-card {
+      position: relative;
+      overflow: hidden
+    }
+
+    .project-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      box-shadow: inset 0 0 0 1.5px transparent;
+      transition: box-shadow .4s;
+      pointer-events: none
+    }
+
+    .project-card:hover::after {
+      box-shadow: inset 0 0 0 1.5px var(--proj-clr, rgba(59, 130, 246, .15))
+    }
+
+    .project-card .proj-step {
+      opacity: .7;
+      transform: translate3d(-4px, 0, 0);
+      transition: all .35s cubic-bezier(.215, .61, .355, 1)
+    }
+
+    .project-card:hover .proj-step {
+      opacity: 1;
+      transform: translate3d(0, 0, 0)
+    }
+
+    .project-card:hover .proj-step:nth-child(1) {
+      transition-delay: 0s
+    }
+
+    .project-card:hover .proj-step:nth-child(2) {
+      transition-delay: .06s
+    }
+
+    .project-card:hover .proj-step:nth-child(3) {
+      transition-delay: .12s
+    }
+
+    .project-card:hover .proj-step:nth-child(4) {
+      transition-delay: .18s
+    }
+
+    .proj-counter {
+      font-variant-numeric: tabular-nums
+    }
+
+    .sec-label {
+      font-size: .6875rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: #3b82f6
+    }
+
+    .caret {
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      background: #3b82f6;
+      margin-left: 2px;
+      animation: blink 1.1s step-end infinite
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: 0
+      }
+    }
+
+    /* ── Particles canvas ── */
+    #particles {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none
+    }
+
+    /* ── Hero mesh gradient ── */
+    .hero-mesh {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      z-index: 0
+    }
+
+    .hero-mesh .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: .06;
+      will-change: transform
+    }
+
+    .hero-mesh .blob-1 {
+      width: 600px;
+      height: 600px;
+      background: #3b82f6;
+      top: -200px;
+      left: -150px;
+      animation: b1 18s ease-in-out infinite alternate
+    }
+
+    .hero-mesh .blob-2 {
+      width: 500px;
+      height: 500px;
+      background: #8b5cf6;
+      bottom: -200px;
+      right: -150px;
+      animation: b2 15s ease-in-out infinite alternate
+    }
+
+    .hero-mesh .blob-3 {
+      width: 300px;
+      height: 300px;
+      background: #ec4899;
+      top: 40%;
+      left: 60%;
+      animation: b3 12s ease-in-out infinite alternate
+    }
+
+    @keyframes b1 {
+      to {
+        transform: translate3d(60px, -40px, 0) scale(1.1)
+      }
+    }
+
+    @keyframes b2 {
+      to {
+        transform: translate3d(-50px, 30px, 0) scale(.9)
+      }
+    }
+
+    @keyframes b3 {
+      to {
+        transform: translate3d(-40px, -60px, 0) scale(1.15)
+      }
+    }
+
+    .hero-frame {
+      position: relative;
+      border-radius: 1.25rem;
+      overflow: hidden;
+      border: 1.5px solid rgba(255, 255, 255, .06)
+    }
+
+    .hero-frame::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      background: linear-gradient(135deg, rgba(59, 130, 246, .2), transparent 40%, transparent 60%, rgba(139, 92, 246, .2));
+      z-index: 1;
+      pointer-events: none
+    }
+
+    /* ── Timeline ── */
+    .tl-line {
+      position: absolute;
+      left: 17px;
+      top: 0;
+      bottom: 0;
+      width: 1.5px;
+      background: linear-gradient(180deg, #10b981, #3b82f6 60%, transparent)
+    }
+
+    .tl-dot {
+      position: absolute;
+      left: 10px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2.5px solid;
+      background: #050508;
+      z-index: 2
+    }
+
+    /* ── Animated counter ── */
+    .counter {
+      font-variant-numeric: tabular-nums
+    }
+
+    /* ── Pill / Chip ── */
+    .pill {
+      padding: .375rem 1rem;
+      border-radius: 9999px;
+      font-size: .75rem;
+      font-weight: 600;
+      background: rgba(59, 130, 246, .06);
+      border: 1px solid rgba(59, 130, 246, .1);
+      color: #93c5fd;
+      transition: all .2s
+    }
+
+    .pill:hover {
+      background: rgba(59, 130, 246, .12);
+      border-color: rgba(59, 130, 246, .2);
+      transform: translate3d(0, -1px, 0)
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: .25rem .75rem;
+      border-radius: 9999px;
+      font-size: .6875rem;
+      font-weight: 600;
+      border: 1px solid
+    }
+
+    /* ── Edu card ── */
+    .edu-item {
+      padding: 1rem 1.25rem;
+      border-radius: .75rem;
+      border-left: 3px solid;
+      background: rgba(255, 255, 255, .015);
+      transition: background .2s
+    }
+
+    .edu-item:hover {
+      background: rgba(255, 255, 255, .03)
+    }
+
+    .contact-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, .06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #64748b;
+      transition: all .2s
+    }
+
+    .contact-icon:hover {
+      color: #e2e8f0;
+      border-color: rgba(59, 130, 246, .25);
+      background: rgba(59, 130, 246, .06);
+      transform: translate3d(0, -2px, 0)
+    }
+
+    .proj-img {
+      position: relative;
+      overflow: hidden
+    }
+
+    .proj-img img {
+      transition: transform .5s cubic-bezier(.215, .61, .355, 1)
+    }
+
+    .proj-img:hover img {
+      transform: scale(1.03)
+    }
+
+    /* ── Marquee skills ── */
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 30s linear infinite
+    }
+
+    @keyframes marquee {
+      to {
+        transform: translate3d(-50%, 0, 0)
+      }
+    }
+
+    .marquee-track:hover {
+      animation-play-state: paused
+    }
+
+    /* ── Responsive ── */
+    @media(max-width:768px) {
+      .hero-mesh .blob {
+        filter: blur(70px);
+        opacity: .04
+      }
+
+      .hero-mesh .blob-1 {
+        width: 350px;
+        height: 350px
+      }
+
+      .hero-mesh .blob-2 {
+        width: 300px;
+        height: 300px
+      }
+
+      .hero-mesh .blob-3 {
+        width: 180px;
+        height: 180px
+      }
+    }
+
+    @media(max-width:480px) {
+      .hero-mesh .blob {
+        filter: blur(50px);
+        opacity: .03
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="particles"></canvas>
+  <div id="app"></div>
+
+  <script>
+    /* ── Particle system (lightweight, GPU-composited) ── */
+    (function () {
+      const c = document.getElementById('particles'), ctx = c.getContext('2d');
+      let w, h, pts = [];
+      const N = 50, mouse = { x: -1000, y: -1000 };
+
+      function resize() { w = c.width = innerWidth; h = c.height = innerHeight }
+      function init() { pts = []; for (let i = 0; i < N; i++)pts.push({ x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - .5) * .3, vy: (Math.random() - .5) * .3, r: Math.random() * 1.5 + .5 }) }
+      function draw() {
+        ctx.clearRect(0, 0, w, h);
+        for (let i = 0; i < pts.length; i++) {
+          const p = pts[i];
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0) p.x = w; if (p.x > w) p.x = 0; if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fillStyle = 'rgba(59,130,246,.15)'; ctx.fill();
+          for (let j = i + 1; j < pts.length; j++) {
+            const q = pts[j], dx = p.x - q.x, dy = p.y - q.y, d = dx * dx + dy * dy;
+            if (d < 18000) { ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.strokeStyle = `rgba(59,130,246,${.06 * (1 - d / 18000)})`; ctx.lineWidth = .5; ctx.stroke() }
+          }
+          const mdx = p.x - mouse.x, mdy = p.y - mouse.y, md = mdx * mdx + mdy * mdy;
+          if (md < 25000) { ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(mouse.x, mouse.y); ctx.strokeStyle = `rgba(139,92,246,${.12 * (1 - md / 25000)})`; ctx.lineWidth = .6; ctx.stroke() }
+        }
+        requestAnimationFrame(draw);
+      }
+      addEventListener('resize', () => { resize(); init() }, { passive: true });
+      addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY }, { passive: true });
+      addEventListener('touchmove', e => { mouse.x = e.touches[0].clientX; mouse.y = e.touches[0].clientY }, { passive: true });
+      resize(); init(); draw();
+    })();
+  </script>
+
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    const { useState, useEffect, useRef, useCallback } = React;
+
+    const Ic = ({ n, s = 18, c = '' }) => <i className={`fas fa-${n} ${c}`} style={{ fontSize: s }} />;
+    const Br = ({ n, s = 18, c = '' }) => <i className={`fab fa-${n} ${c}`} style={{ fontSize: s }} />;
+
+    /* ── scroll-reveal ── */
+    const useReveal = () => {
+      useEffect(() => {
+        const io = new IntersectionObserver(
+          es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('v'); }),
+          { threshold: 0.06, rootMargin: '0px 0px -30px 0px' }
+        );
+        document.querySelectorAll('.sr').forEach(el => io.observe(el));
+        return () => io.disconnect();
+      }, []);
+    };
+
+    /* ── Animated counter hook ── */
+    const useCounter = (end, duration = 1800) => {
+      const [val, setVal] = useState(0);
+      const ref = useRef(null);
+      const started = useRef(false);
+      useEffect(() => {
+        const io = new IntersectionObserver(([e]) => {
+          if (e.isIntersecting && !started.current) {
+            started.current = true;
+            const start = performance.now();
+            const step = (now) => {
+              const t = Math.min((now - start) / duration, 1);
+              const eased = 1 - Math.pow(1 - t, 3);
+              setVal(Math.round(eased * end));
+              if (t < 1) requestAnimationFrame(step);
+            };
+            requestAnimationFrame(step);
+          }
+        }, { threshold: 0.5 });
+        if (ref.current) io.observe(ref.current);
+        return () => io.disconnect();
+      }, [end, duration]);
+      return [val, ref];
+    };
+
+    /* ═══════ NAVBAR ═══════ */
+    const Nav = ({ active, go }) => {
+      const [scrolled, setScrolled] = useState(false);
+      const [open, setOpen] = useState(false);
+      const links = ['home', 'about', 'experience', 'research', 'projects', 'activities', 'contact'];
+
+      useEffect(() => {
+        let ticking = false;
+        const fn = () => { if (!ticking) { requestAnimationFrame(() => { setScrolled(window.scrollY > 40); ticking = false; }); ticking = true; } };
+        addEventListener('scroll', fn, { passive: true });
+        return () => removeEventListener('scroll', fn);
+      }, []);
+
+      // Lock body scroll when drawer open
+      useEffect(() => { document.body.style.overflow = open ? 'hidden' : ''; return () => { document.body.style.overflow = ''; }; }, [open]);
+
+      const nav = id => { go(id); setOpen(false); };
+
+      return (
+        <>
+          <nav className={`navbar ${scrolled ? 'scrolled py-2.5' : 'py-4 md:py-5'}`}>
+            <div className="max-w-[1080px] mx-auto px-5 sm:px-6 flex justify-between items-center">
+              <button onClick={() => nav('home')} className="flex items-center gap-2.5 group">
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center text-white text-[.6875rem] sm:text-xs font-bold font-display shadow-md shadow-blue-500/20 group-hover:shadow-blue-500/30 transition-shadow">GV</div>
+                <span className="font-display font-bold text-sm sm:text-[.9375rem] text-white tracking-tight hidden sm:block">SRAVAN</span>
+              </button>
+              <div className="hidden md:flex items-center gap-6 lg:gap-7">
+                {links.map(l => (
+                  <button key={l} onClick={() => nav(l)} className={`nav-item ${active === l ? 'on' : ''}`}>
+                    {l.charAt(0).toUpperCase() + l.slice(1)}
+                  </button>
+                ))}
+                <a href="cv.pdf" download className="ml-2 px-4 py-[.4375rem] rounded-lg text-xs font-semibold text-white bg-gradient-to-r from-blue-600 to-violet-600 hover:brightness-110 transition shadow-sm shadow-blue-500/15">
+                  Resume <Ic n="arrow-down" s={10} c="ml-1" />
+                </a>
+              </div>
+              <button className={`burger md:hidden ${open ? 'x' : ''}`} onClick={() => setOpen(!open)} aria-label="Menu">
+                <span /><span /><span />
+              </button>
+            </div>
+          </nav>
+          <div className={`drawer-bg ${open ? 'show' : ''}`} onClick={() => setOpen(false)} />
+          <div className={`drawer ${open ? 'show' : ''}`}>
+            {links.map(l => <button key={l} onClick={() => nav(l)} className="drawer-link w-full text-left capitalize">{l}</button>)}
+            <a href="cv.pdf" download className="drawer-link inline-flex items-center gap-2 text-blue-400 mt-2"><Ic n="arrow-down" s={13} /> Download Resume</a>
+          </div>
+        </>
+      );
+    };
+
+    /* ═══════ HERO ═══════ */
+    const Hero = ({ go }) => {
+      const [typed, setTyped] = useState('');
+      const text = 'AI-Powered Healthcare Researcher';
+      useEffect(() => {
+        let i = 0;
+        const t = setInterval(() => { setTyped(text.slice(0, ++i)); if (i >= text.length) clearInterval(t); }, 45);
+        return () => clearInterval(t);
+      }, []);
+
+      const [pubCount, pubRef] = useCounter(2, 1200);
+      const [cgpa, cgpaRef] = useCounter(862, 1800);
+      const [projCount, projRef] = useCounter(3, 1400);
+
+      return (
+        <section id="home" className="relative min-h-[100dvh] flex items-center pt-16 sm:pt-20 px-5 sm:px-6 overflow-hidden">
+          <div className="hero-mesh">
+            <div className="blob blob-1" /><div className="blob blob-2" /><div className="blob blob-3" />
+          </div>
+
+          <div className="max-w-[1080px] mx-auto grid md:grid-cols-2 gap-10 md:gap-14 items-center w-full relative z-10">
+            <div className="space-y-6 sm:space-y-7">
+              <div className="sr v inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/8 border border-emerald-500/15 text-emerald-400 text-xs font-semibold">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,.6)]" />
+                Open for Research & Opportunities
+              </div>
+
+              <h1 className="font-display text-[clamp(2rem,5.5vw,4rem)] font-800 leading-[1.1] tracking-tight text-white">
+                {typed}<span className="caret" />
+              </h1>
+
+              <p className="text-[.9375rem] sm:text-base text-slate-400 max-w-md leading-relaxed">
+                B.Tech <span className="text-slate-200 font-medium">Biomedical Engineering</span> at Lovely Professional University (CGPA: 8.62).
+                Published <span className="text-slate-200 font-medium">Springer author</span> in AI healthcare diagnostics & contactless sensing.
+              </p>
+
+              <div className="flex flex-wrap gap-3">
+                <button onClick={() => go('projects')} className="group px-5 sm:px-6 py-2.5 sm:py-3 bg-white text-[#050508] text-sm font-semibold rounded-xl hover:bg-slate-100 transition shadow-lg shadow-white/5">
+                  View Projects <Ic n="arrow-right" s={12} c="ml-1.5 group-hover:translate-x-0.5 transition-transform inline-block text-blue-600" />
+                </button>
+                <button onClick={() => go('contact')} className="px-5 sm:px-6 py-2.5 sm:py-3 border border-white/10 text-sm font-semibold rounded-xl hover:border-white/20 hover:bg-white/[.03] transition text-white">
+                  Get in Touch
+                </button>
+              </div>
+
+              <div className="flex items-center gap-6 sm:gap-8 pt-2">
+                <div ref={pubRef}>
+                  <div className="text-xl font-bold font-display text-white counter">{pubCount}+</div>
+                  <div className="text-[.5625rem] sm:text-[.625rem] text-slate-500 uppercase tracking-[.15em] font-semibold mt-0.5">Publications</div>
+                </div>
+                <div className="w-px h-8 bg-white/6" />
+                <div ref={cgpaRef}>
+                  <div className="text-xl font-bold font-display text-white counter">{(cgpa / 100).toFixed(2)}</div>
+                  <div className="text-[.5625rem] sm:text-[.625rem] text-slate-500 uppercase tracking-[.15em] font-semibold mt-0.5">CGPA</div>
+                </div>
+                <div className="w-px h-8 bg-white/6" />
+                <div ref={projRef}>
+                  <div className="text-xl font-bold font-display text-white counter">{projCount}+</div>
+                  <div className="text-[.5625rem] sm:text-[.625rem] text-slate-500 uppercase tracking-[.15em] font-semibold mt-0.5">Projects</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="hidden md:flex justify-center sr v" style={{ transitionDelay: '.2s' }}>
+              <div className="hero-frame w-64 lg:w-72 h-80 lg:h-[22rem] shadow-2xl shadow-blue-900/10">
+                <img src="sravan_image.png" alt="Guntumadugu Venkata Sravan" className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050508] via-transparent to-transparent z-[2]" />
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    /* ═══════ ABOUT + EDUCATION ═══════ */
+    const About = () => {
+      const edu = [
+        { school: 'Lovely Professional University', deg: 'Bachelor of Technology in Biomedical Engineering', score: 'CGPA: 8.62', loc: 'Jalandhar, Punjab', time: 'Aug 2023 – Present', clr: '#3b82f6' },
+        { school: 'Viswasai Junior College', deg: 'Intermediate', score: 'Percentage: 92.2%', loc: 'Nellore, AP', time: 'Jun 2018 – Mar 2020', clr: '#8b5cf6' },
+        { school: 'Silpa English Medium High School', deg: 'Matriculation', score: 'Percentage: 93%', loc: 'Nellore, AP', time: 'Apr 2017 – Mar 2018', clr: '#ec4899' },
+      ];
+      const pills = ['Machine Learning', 'Deep Learning', 'Bio-signal Processing', 'Biomedical Data Analysis', 'Python • C++ • SQL', 'TensorFlow • Keras • OpenCV', 'Computer Vision', 'Arduino / Embedded'];
+
+      return (
+        <section id="about" className="py-20 sm:py-28 px-5 sm:px-6">
+          <div className="max-w-[1080px] mx-auto">
+            <div className="sr">
+              <p className="sec-label">About</p>
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white mt-2 mb-3">Who I Am</h2>
+              <div className="h-[3px] w-12 rounded-full bg-gradient-to-r from-blue-500 to-violet-500 mb-10 sm:mb-12" />
+            </div>
+
+            <div className="grid lg:grid-cols-5 gap-10 lg:gap-14">
+              <div className="lg:col-span-3 space-y-4 sm:space-y-5 sr sr-d1">
+                <p className="text-slate-400 leading-[1.75] text-sm sm:text-[.9375rem]">
+                  Hello, I am <span className="text-white font-semibold">G Venkata Sravan</span>, a biomedical engineering student who enjoys working in engineering, healthcare and research. I am curious about how <span className="text-blue-300 font-medium">data, sensors and intelligent systems</span> can quietly improve clinical decision-making and patient care.
+                </p>
+                <p className="text-slate-400 leading-[1.75] text-sm sm:text-[.9375rem]">
+                  Through internships, projects and publications, I have explored areas such as <span className="text-white font-medium">biosensor integration</span>, <span className="text-white font-medium">machine learning for health predictions</span>, <span className="text-white font-medium">computer vision-based control systems</span> and <span className="text-white font-medium">ethical considerations in AI-driven diagnostics</span>. I like to learn by building, experimenting and questioning assumptions — and I'm inspired by research that doesn't just stay on paper, but actually makes sense in practice.
+                </p>
+                <div className="flex flex-wrap gap-2 pt-2">
+                  {pills.map((p, i) => <span key={i} className="pill">{p}</span>)}
+                </div>
+              </div>
+
+              <div className="lg:col-span-2 sr sr-d2">
+                <h3 className="font-display font-bold text-sm text-white mb-4 sm:mb-5 flex items-center gap-2">
+                  <Ic n="graduation-cap" s={15} c="text-blue-400" /> Education
+                </h3>
+                <div className="space-y-3 sm:space-y-4">
+                  {edu.map((e, i) => (
+                    <div key={i} className="edu-item" style={{ borderLeftColor: e.clr }}>
+                      <h4 className="font-semibold text-white text-[.8125rem]">{e.school}</h4>
+                      <p className="text-xs mt-1 font-medium" style={{ color: e.clr }}>{e.deg}</p>
+                      <p className="text-[.6875rem] text-slate-400 font-semibold mt-1">{e.score}</p>
+                      <div className="flex items-center justify-between mt-1.5 text-[.625rem] text-slate-500">
+                        <span><Ic n="map-marker-alt" s={9} c="mr-1" />{e.loc}</span>
+                        <span>{e.time}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    /* ═══════ MARQUEE SKILLS ═══════ */
+    const SkillsMarquee = () => {
+      const items = ['Python', 'TensorFlow', 'C++', 'OpenCV', 'Keras', 'SQL', 'Arduino', 'MATLAB', 'Scikit-learn', 'MediaPipe', 'CNN', 'LSTM', 'Git', 'Linux', 'Jupyter', 'Signal Processing', 'Medical Imaging'];
+      const doubled = [...items, ...items];
+      return (
+        <div className="py-8 sm:py-10 border-y border-white/[.03] overflow-hidden bg-[#07080e]">
+          <div className="marquee-track">
+            {doubled.map((s, i) => (
+              <span key={i} className="mx-3 sm:mx-4 text-[.6875rem] sm:text-xs font-semibold text-slate-500 uppercase tracking-[.12em] whitespace-nowrap flex items-center gap-2">
+                <span className="w-1 h-1 rounded-full bg-blue-500/40" />{s}
+              </span>
+            ))}
+          </div>
+        </div>
+      );
+    };
+
+    /* ═══════ WORK EXPERIENCE (Skyfi Labs removed) ═══════ */
+    const Experience = () => (
+      <section id="experience" className="py-20 sm:py-28 px-5 sm:px-6 bg-[#07080e]">
+        <div className="max-w-[1080px] mx-auto">
+          <div className="sr">
+            <p className="sec-label">Career</p>
+            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white mt-2 mb-3">Work Experience</h2>
+            <div className="h-[3px] w-12 rounded-full bg-gradient-to-r from-emerald-400 to-blue-500 mb-10 sm:mb-14" />
+          </div>
+
+          <div className="relative pl-9 sm:pl-10">
+            <div className="tl-line" />
+            <div className="relative sr sr-d1">
+              <div className="tl-dot" style={{ borderColor: '#10b981', top: '1.25rem' }} />
+              <div className="card p-5 sm:p-6 ml-4 sm:ml-5">
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
+                  <div>
+                    <h3 className="font-display font-bold text-base sm:text-lg text-white">Biomedical Engineer Intern</h3>
+                    <p className="text-sm font-semibold mt-0.5 text-emerald-400"><Ic n="hospital" s={13} c="mr-1.5" />KIMS Hospitals</p>
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-slate-500 shrink-0">
+                    <span className="px-2.5 py-1 rounded-md bg-white/[.03] border border-white/[.04]">Jun 2025 – Jul 2025</span>
+                    <span className="uppercase tracking-wider font-bold text-[.625rem] text-emerald-400">1 Month</span>
+                  </div>
+                </div>
+                <p className="text-sm text-slate-400 leading-relaxed mb-3">Hands-on experience in biomedical equipment management, calibration, and troubleshooting of clinical devices alongside senior biomedical engineers. Ensured regulatory-compliant maintenance and quality assurance of hospital medical equipment.</p>
+                <ul className="grid sm:grid-cols-2 gap-1.5">
+                  {['Maintained & calibrated critical medical equipment', 'Collaborated with clinical engineering team', 'Ensured compliance with biomedical safety standards', 'Documented maintenance procedures & protocols'].map((p, k) => (
+                    <li key={k} className="flex items-start gap-2 text-[.8125rem] text-slate-400">
+                      <Ic n="check" s={10} c="text-emerald-400 mt-1 shrink-0" />{p}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+
+    /* ═══════ RESEARCH ═══════ */
+    const Research = () => {
+      const pubs = [
+        {
+          title: 'Contactless Human Sensing Using Wireless Signals for Personalized Biomedical and Healthcare',
+          pub: 'Springer', type: 'Book Chapter', yr: '2025', doi: '10.1007/978-3-031-91147-7_16', status: 'Published',
+          desc: 'Explores contactless health monitoring using wireless signals (Wi-Fi, radar) to track breathing, heart rate, and movement. Demonstrates ML models for anomaly detection and personalized care.',
+          pts: ['Wireless signal-based contactless health monitoring', 'Real-time vital sign monitoring without wearables', 'Machine learning for health anomaly detection', 'Privacy-preserving biomedical signal processing'],
+          link: 'https://www.researchgate.net/publication/393714968_Contactless_Human_Sensing_Using_Wireless_Signals_for_Personalized_Biomedical_and_Healthcare',
+          clr: '#22d3ee', icon: 'wifi'
+        },
+        {
+          title: 'Ethical Considerations and Regulatory Compliance in AI Driven Diagnostics',
+          pub: 'Springer', type: 'Book Chapter', yr: 'July 2025', doi: '10.1007/978-3-031-91147-7_5', pages: '91 – 113', status: 'Published',
+          desc: 'Examines ethical dilemmas and regulatory compliance in AI diagnostic systems: patient privacy (GDPR, HIPAA), data security, algorithmic bias, and accountability.',
+          pts: ['Patient privacy & data security compliance', 'Regulatory frameworks (GDPR, HIPAA)', 'Algorithmic bias & fairness in diagnostics', 'Accountability & transparency in medical AI'],
+          link: 'https://www.researchgate.net/publication/393711910_Ethical_Considerations_and_Regulatory_Compliance_in_AI_Driven_Diagnostics',
+          clr: '#fb7185', icon: 'scale-balanced'
+        },
+      ];
+
+      return (
+        <section id="research" className="py-20 sm:py-28 px-5 sm:px-6">
+          <div className="max-w-[1080px] mx-auto">
+            <div className="sr text-center sm:text-left">
+              <p className="sec-label">Publications</p>
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white mt-2 mb-2">Research Work</h2>
+              <p className="text-sm text-slate-500 mb-3">Peer-reviewed, Springer-published chapters in AI healthcare and biomedical sensing.</p>
+              <div className="h-[3px] w-12 rounded-full bg-gradient-to-r from-cyan-400 to-rose-400 mb-10 sm:mb-14 mx-auto sm:mx-0" />
+            </div>
+
+            <div className="space-y-7 sm:space-y-9">
+              {pubs.map((p, i) => (
+                <div key={i} className={`sr sr-d${i + 1} card research-card p-5 sm:p-7 md:p-9`}
+                  style={{ '--glow-clr': p.clr, background: `linear-gradient(135deg, ${p.clr}06, transparent 50%)` }}>
+                  {/* Animated glow border via CSS ::before + @property --angle */}
+                  <div className="reading-bar" style={{ '--glow-clr': p.clr }} />
+                  <div className="absolute top-5 right-5 watermark-icon opacity-[.03] hidden sm:block"><Ic n={p.icon} s={100} /></div>
+                  <div className="relative space-y-4">
+                    <div className="flex flex-wrap items-center gap-2.5">
+                      <div className="chip" style={{ color: p.clr, borderColor: p.clr + '30', background: p.clr + '10' }}>
+                        <Ic n="book" s={11} /> {p.type}
+                      </div>
+                      <div className="pulse-badge chip text-emerald-400 border-emerald-400/25 bg-emerald-400/10">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block" /> {p.status}
+                      </div>
+                    </div>
+                    <h3 className="font-display text-lg sm:text-xl md:text-[1.65rem] font-bold text-white leading-snug">{p.title}</h3>
+                    <div className="flex flex-wrap items-center gap-3 text-sm">
+                      <span className="flex items-center gap-1.5 font-bold" style={{ color: p.clr }}>
+                        <Ic n="book-open" s={13} /> {p.pub}
+                      </span>
+                      <span className="w-1 h-1 rounded-full bg-slate-600" />
+                      <span className="text-slate-400 font-medium">{p.yr}</span>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {[['DOI', p.doi], p.pages && ['Pages', p.pages]].filter(Boolean).map(([label, val], j) => (
+                        <div key={j} className="card px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-lg">
+                          <div className="text-[.5rem] sm:text-[.5625rem] text-slate-500 uppercase tracking-wider">{label}</div>
+                          <div className="font-bold text-[.6875rem] sm:text-xs text-white">{val}</div>
+                        </div>
+                      ))}
+                    </div>
+                    <p className="text-[.8125rem] sm:text-sm text-slate-400 leading-relaxed max-w-3xl">{p.desc}</p>
+                    <div className="pt-4 border-t border-white/[.04]">
+                      <h4 className="text-[.625rem] font-bold text-slate-500 uppercase tracking-[.18em] mb-3">Key Contributions</h4>
+                      <ul className="grid sm:grid-cols-2 gap-2">
+                        {p.pts.map((pt, k) => (
+                          <li key={k} className="flex items-start gap-2.5 text-[.75rem] sm:text-[.8125rem] text-slate-400 group/li">
+                            <span className="mt-0.5 shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-[.5625rem] font-bold transition-colors group-hover/li:bg-opacity-20" style={{ background: p.clr + '12', color: p.clr }}>
+                              <Ic n="check" s={9} />
+                            </span>
+                            <span className="group-hover/li:text-slate-300 transition-colors">{pt}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <a href={p.link} target="_blank" rel="noopener noreferrer" className="group/link inline-flex items-center gap-2 text-sm font-semibold transition pt-1" style={{ color: p.clr }}>
+                      <span className="group-hover/link:underline">Read on ResearchGate</span>
+                      <Ic n="arrow-right" s={12} c="group-hover/link:translate-x-1 transition-transform inline-block" />
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    /* ═══════ PROJECTS ═══════ */
+    const Projects = () => {
+      const items = [
+        {
+          title: 'Arduino-Based Bio-Signal Monitor',
+          sub: 'DAQ System • Real-time EMG / ECG Monitoring',
+          img: 'emgsensor.png',
+          desc: 'Captures and visualizes human bio-electrical signals in real-time using adhesive electrodes, a custom amplification PCB, and an Arduino micro-controller.',
+          steps: [{ l: 'Sensing', t: 'Adhesive electrodes detect micro-volt signals from skin.' }, { l: 'Amplification', t: 'Custom PCB boosts signals for digitization.' }, { l: 'Processing', t: 'Arduino converts analog pulses into digital streams.' }, { l: 'Output', t: 'Live waveform displayed for monitoring or control.' }],
+          tech: ['Arduino', 'EMG/ECG', 'PCB Design', 'Signal Processing'],
+          clr: '#10b981', icon: 'heartbeat'
+        },
+        {
+          title: 'Hybrid Robotic Arm: OpenCV + EMG',
+          sub: 'Computer Vision + Bio-signal Control',
+          img: 'bionic arm.jpeg',
+          desc: 'Combines OpenCV hand tracking with EMG intent detection to control a robotic arm. Vision provides spatial coordinates; EMG handles gripper force.',
+          steps: [{ l: 'Vision', t: 'MediaPipe tracks 21 hand landmarks for joint angles.' }, { l: 'EMG', t: 'Forearm muscle spikes map to grip commands.' }, { l: 'Processing', t: 'Python fuses video & serial streams concurrently.' }, { l: 'Actuation', t: 'Arduino drives servos for arm joints and gripper.' }],
+          tech: ['OpenCV', 'MediaPipe', 'EMG', 'Arduino', 'Python', 'Servo'],
+          clr: '#6366f1', icon: 'robot'
+        },
+      ];
+
+      return (
+        <section id="projects" className="py-20 sm:py-28 px-5 sm:px-6 bg-[#07080e]">
+          <div className="max-w-[1080px] mx-auto">
+            <div className="sr text-center sm:text-left">
+              <p className="sec-label">Portfolio</p>
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white mt-2 mb-2">Projects</h2>
+              <p className="text-sm text-slate-500 mb-3">Hands-on builds — from biosensor hardware to computer vision control systems.</p>
+              <div className="h-[3px] w-12 rounded-full bg-gradient-to-r from-emerald-400 to-indigo-400 mb-10 sm:mb-14 mx-auto sm:mx-0" />
+            </div>
+
+            <div className="space-y-8 sm:space-y-10">
+              {items.map((p, i) => (
+                <div key={i} className={`sr sr-d${i + 1} card project-card`} style={{ '--proj-clr': p.clr + '20' }}>
+                  <div className="grid md:grid-cols-3">
+                    <div className="proj-img h-52 sm:h-60 md:h-auto relative">
+                      <img src={p.img} alt={p.title} className="w-full h-full object-cover" />
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#0f1320]/95 hidden md:block" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0f1320] via-[#0f1320]/50 to-transparent md:hidden" />
+                      {/* Floating icon on image */}
+                      <div className="absolute top-3 left-3 sm:top-4 sm:left-4 w-10 h-10 rounded-xl flex items-center justify-center backdrop-blur-md" style={{ background: p.clr + '20', border: `1px solid ${p.clr}30` }}>
+                        <Ic n={p.icon} s={16} c="" style={{ color: p.clr }} />
+                      </div>
+                    </div>
+                    <div className="md:col-span-2 p-5 sm:p-6 md:p-8 space-y-3.5 sm:space-y-4">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <div className="chip" style={{ color: p.clr, borderColor: p.clr + '30', background: p.clr + '10' }}>
+                          <Ic n="diagram-project" s={10} /> Project
+                        </div>
+                        <div className="chip text-slate-400 border-slate-700 bg-white/[.02]">
+                          <Ic n="microchip" s={9} /> Hardware + Software
+                        </div>
+                      </div>
+                      <h3 className="font-display text-lg sm:text-xl md:text-[1.4rem] font-bold text-white leading-snug">{p.title}</h3>
+                      <p className="text-xs font-semibold tracking-wide" style={{ color: p.clr }}>{p.sub}</p>
+                      <p className="text-[.8125rem] sm:text-sm text-slate-400 leading-relaxed">{p.desc}</p>
+                      <div>
+                        <h4 className="text-[.625rem] font-bold text-slate-500 uppercase tracking-[.18em] mb-2.5 flex items-center gap-1.5">
+                          <Ic n="cogs" s={10} c="text-slate-600" /> Pipeline
+                        </h4>
+                        <div className="grid sm:grid-cols-2 gap-2.5">
+                          {p.steps.map((s, j) => (
+                            <div key={j} className="proj-step flex items-start gap-2.5 text-[.75rem] sm:text-[.8125rem]">
+                              <span className="w-6 h-6 rounded-lg flex items-center justify-center shrink-0 mt-0.5 text-[.625rem] font-bold shadow-sm" style={{ background: `linear-gradient(135deg, ${p.clr}25, ${p.clr}10)`, color: p.clr, border: `1px solid ${p.clr}20` }}>{j + 1}</span>
+                              <span className="text-slate-400"><span className="text-white font-medium">{s.l}:</span> {s.t}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="pt-2">
+                        <h4 className="text-[.5625rem] font-bold text-slate-600 uppercase tracking-[.18em] mb-2">Tech Stack</h4>
+                        <div className="flex flex-wrap gap-1.5">
+                          {p.tech.map((t, k) => (
+                            <span key={k} className="px-3 py-1 rounded-full text-[.625rem] font-semibold transition-all hover:scale-105" style={{ background: p.clr + '0d', color: p.clr, border: `1px solid ${p.clr}18` }}>{t}</span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    /* ═══════ ACTIVITIES ═══════ */
+    const Activities = () => (
+      <section id="activities" className="py-20 sm:py-28 px-5 sm:px-6">
+        <div className="max-w-[1080px] mx-auto">
+          <div className="sr">
+            <p className="sec-label">Beyond Academics</p>
+            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white mt-2 mb-3">Activities & Achievements</h2>
+            <div className="h-[3px] w-12 rounded-full bg-gradient-to-r from-pink-400 to-amber-400 mb-10 sm:mb-14" />
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-5 sm:gap-6">
+            {/* NSS */}
+            <div className="sr sr-d1 card overflow-hidden group">
+              <div className="proj-img h-48 sm:h-56 overflow-hidden">
+                <img src="nss certificate.jpeg" alt="NSS Certificate" className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0f1320] via-[#0f1320]/40 to-transparent" />
+                <div className="absolute bottom-3 sm:bottom-4 left-4 sm:left-5">
+                  <div className="chip text-pink-400 border-pink-400/25 bg-pink-400/10 mb-1.5"><Ic n="heart" s={10} /> NSS Volunteer</div>
+                  <h3 className="font-display font-bold text-sm sm:text-base text-white">National Service Scheme</h3>
+                </div>
+              </div>
+              <div className="p-4 sm:p-5 space-y-2.5">
+                <p className="text-[.8125rem] text-slate-400 leading-relaxed">Active NSS volunteer at LPU — community health initiatives, sustainability drives, and social impact programs.</p>
+                <ul className="space-y-1.5">
+                  {['Community health awareness campaigns', 'Campus sustainability drives', 'Blood donation & health check-up camps', 'Rural outreach initiatives'].map((x, k) => (
+                    <li key={k} className="flex items-start gap-2 text-[.75rem] sm:text-[.8125rem] text-slate-400"><Ic n="check" s={10} c="text-pink-400 mt-1 shrink-0" />{x}</li>
+                  ))}
+                </ul>
+                <span className="inline-block text-[.5625rem] sm:text-[.625rem] font-bold text-pink-400 uppercase tracking-[.12em]"><Ic n="certificate" s={10} c="mr-1" />Certificate Awarded</span>
+              </div>
+            </div>
+
+            {/* Springer */}
+            <div className="sr sr-d2 card p-4 sm:p-6 space-y-3 sm:space-y-4">
+              <div className="chip text-violet-400 border-violet-400/25 bg-violet-400/10"><Ic n="award" s={10} /> Achievement</div>
+              <h3 className="font-display font-bold text-sm sm:text-base text-white">Published Springer Author</h3>
+              <p className="text-[.8125rem] text-slate-400 leading-relaxed">Two book chapters published with Springer — global scientific publisher. Research spans AI diagnostics regulation and contactless health monitoring.</p>
+              <div className="card p-2.5 sm:p-3 rounded-lg inline-block">
+                <div className="text-[.5rem] sm:text-[.5625rem] text-slate-500 uppercase tracking-wider">ORCID</div>
+                <div className="font-bold text-xs sm:text-sm text-violet-300">0009-0007-0471-9580</div>
+              </div>
+              <ul className="space-y-1.5">
+                {['2 published Springer book chapters', 'Research in AI healthcare diagnostics', 'Cited work in contactless sensing', 'Active ResearchGate contributor'].map((x, k) => (
+                  <li key={k} className="flex items-start gap-2 text-[.75rem] sm:text-[.8125rem] text-slate-400"><Ic n="star" s={10} c="text-amber-400 mt-1 shrink-0" />{x}</li>
+                ))}
+              </ul>
+              <a href="https://link.springer.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm font-semibold text-violet-400 hover:underline">
+                View on Springer <Ic n="external-link-alt" s={11} />
+              </a>
+            </div>
+
+            {/* Internship cert */}
+            <div className="sr sr-d3 card overflow-hidden group">
+              <div className="proj-img h-48 sm:h-56 overflow-hidden">
+                <img src="internship certificate.jpg.jpeg" alt="KIMS Internship Certificate" className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0f1320] via-[#0f1320]/40 to-transparent" />
+                <div className="absolute bottom-3 sm:bottom-4 left-4 sm:left-5">
+                  <div className="chip text-emerald-400 border-emerald-400/25 bg-emerald-400/10 mb-1.5"><Ic n="hospital" s={10} /> Internship</div>
+                  <h3 className="font-display font-bold text-sm sm:text-base text-white">KIMS Hospitals — Biomedical Eng.</h3>
+                </div>
+              </div>
+              <div className="p-4 sm:p-5">
+                <p className="text-[.8125rem] text-slate-400 leading-relaxed">Professional internship — hands-on biomedical equipment calibration & troubleshooting under clinical supervision.</p>
+                <span className="inline-block mt-2 text-[.5625rem] sm:text-[.625rem] font-bold text-emerald-400 uppercase tracking-[.12em]"><Ic n="certificate" s={10} c="mr-1" />Certificate Awarded</span>
+              </div>
+            </div>
+
+            {/* Skills grid */}
+            <div className="sr sr-d4 card p-4 sm:p-6 space-y-3 sm:space-y-4">
+              <div className="chip text-blue-400 border-blue-400/25 bg-blue-400/10"><Ic n="code" s={10} /> Technical Arsenal</div>
+              <h3 className="font-display font-bold text-sm sm:text-base text-white">Technical Skills</h3>
+              {[
+                { cat: 'Programming', items: ['Python', 'C++', 'SQL', 'MATLAB'], clr: '#3b82f6' },
+                { cat: 'AI / ML', items: ['TensorFlow', 'Keras', 'OpenCV', 'Scikit-learn'], clr: '#8b5cf6' },
+                { cat: 'Domain', items: ['Bio-signal Processing', 'Medical Imaging', 'CNN / LSTM'], clr: '#ec4899' },
+                { cat: 'Tools', items: ['Git', 'Arduino', 'Linux', 'Jupyter'], clr: '#10b981' },
+              ].map((g, j) => (
+                <div key={j}>
+                  <div className="text-[.5625rem] sm:text-[.625rem] font-bold uppercase tracking-[.15em] mb-1.5" style={{ color: g.clr }}>{g.cat}</div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {g.items.map((it, k) => (
+                      <span key={k} className="px-2.5 sm:px-3 py-[3px] rounded-full text-[.625rem] sm:text-[.6875rem] font-medium bg-white/[.03] border border-white/[.05] text-slate-300 hover:border-blue-500/20 transition">{it}</span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+
+    /* ═══════ CONTACT ═══════ */
+    const Contact = () => (
+      <footer id="contact" className="py-20 sm:py-28 px-5 sm:px-6 border-t border-white/[.03] bg-[#040406]">
+        <div className="max-w-[1080px] mx-auto">
+          <div className="text-center space-y-5 sm:space-y-6 sr">
+            <p className="sec-label">Contact</p>
+            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold gt">Let's Connect</h2>
+            <p className="text-slate-400 max-w-md mx-auto text-sm leading-relaxed">Open to research collaborations, academic opportunities, and professional connections in biomedical engineering & AI.</p>
+            <a href="mailto:venkatsravan2102@gmail.com" className="inline-block text-base sm:text-lg md:text-xl font-semibold text-white hover:text-blue-400 transition break-all sm:break-normal">venkatsravan2102@gmail.com</a>
+            <div className="flex justify-center gap-3">
+              {[
+                { n: 'linkedin', b: true, href: 'https://www.linkedin.com/in/venkat-sravan-guntumadugu', label: 'LinkedIn' },
+                { n: 'github', b: true, href: 'https://github.com/VenkatSravan-21', label: 'GitHub' },
+                { n: 'researchgate', b: true, href: 'https://www.researchgate.net/profile/Venkat-Sravan-Guntumadugu', label: 'ResearchGate' },
+                { n: 'envelope', b: false, href: 'mailto:venkatsravan2102@gmail.com', label: 'Email' },
+              ].map((l, i) => (
+                <a key={i} href={l.href} target={l.n !== 'envelope' ? '_blank' : undefined} rel="noopener noreferrer" className="contact-icon" title={l.label}>
+                  {l.b ? <Br n={l.n} s={17} /> : <Ic n={l.n} s={17} />}
+                </a>
+              ))}
+            </div>
+          </div>
+          <div className="mt-12 sm:mt-16 pt-5 sm:pt-6 border-t border-white/[.03] flex flex-col sm:flex-row items-center justify-between gap-3 text-[.5625rem] sm:text-[.625rem] text-slate-600 uppercase tracking-[.12em]">
+            <p>© 2026 Guntumadugu Venkata Sravan</p>
+            <p>Lovely Professional University, Jalandhar, Punjab</p>
+          </div>
+        </div>
+      </footer>
+    );
+
+    /* ═══════ APP ═══════ */
+    const App = () => {
+      const [active, setActive] = useState('home');
+      useReveal();
+
+      useEffect(() => {
+        const secs = document.querySelectorAll('section, footer');
+        const io = new IntersectionObserver(
+          es => es.forEach(e => { if (e.isIntersecting && e.target.id) setActive(e.target.id); }),
+          { threshold: 0.2, rootMargin: '-60px 0px -35% 0px' }
+        );
+        secs.forEach(s => { if (s.id) io.observe(s); });
+        return () => io.disconnect();
+      }, []);
+
+      const go = useCallback(id => {
+        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+      }, []);
+
+      return (
+        <div className="min-h-screen relative z-10">
+          <Nav active={active} go={go} />
+          <Hero go={go} />
+          <SkillsMarquee />
+          <About />
+          <Experience />
+          <Research />
+          <Projects />
+          <Activities />
+          <Contact />
+        </div>
+      );
+    };
+
+    ReactDOM.createRoot(document.getElementById('app')).render(<App />);
+  </script>
+</body>
+
+</html>
