@@ -1062,6 +1062,20 @@
           tech: ['OpenCV', 'MediaPipe', 'EMG', 'Arduino', 'Python', 'Servo'],
           clr: '#6366f1', icon: 'robot'
         },
+        {
+          title: 'Parkinson’s Disease Detection using LSTM–CNN Fusion',
+          sub: 'Multimodal analysis of handwriting & speech for early PD detection',
+          img: 'file:///C:/Users/hp/Desktop/Picture1.png',
+          desc: 'Developed a multimodal deep learning system that fuses CNN features from handwriting spiral images with LSTM features from speech MFCCs to detect Parkinson\u2019s disease non-invasively.',
+          steps: [
+            { l: 'Handwriting', t: 'Applied Sobel edge detection and CNN to capture tremor-related stroke irregularities.' },
+            { l: 'Speech', t: 'Extracted MFCCs and used an LSTM to model temporal vocal variations.' },
+            { l: 'Fusion', t: 'Fused modality features and trained a classifier to improve diagnostic accuracy.' },
+            { l: 'Evaluation', t: 'Achieved improved accuracy compared to single-modality baselines.' }
+          ],
+          tech: ['CNN', 'LSTM', 'MFCC', 'OpenCV', 'TensorFlow', 'Keras'],
+          clr: '#ef4444', icon: 'brain'
+        },
       ];
 
       return (
